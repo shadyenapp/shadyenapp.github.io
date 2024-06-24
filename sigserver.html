@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shadyenapp</title>
+        <link rel="stylesheet", href="styleDocuments.css" />
+        <!--Fonts-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <!--Nav-->
+        <header>
+            <div class="container header">
+                <a href="https://www.github.com/shadyenapp">
+                <img src="./images/github.png" class="logo" width="50px" height="50px" />
+                </a>
+                <div class="title">
+                    <h1>Projects - Signature Verification Server</h1>
+                </div>
+                <div class="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="navigation">
+                    <li><a href="./index.html">Home</a></li>
+                    <li class="active"><a href="./projects.html">Projects</a></li>
+                    <li><a href="./htb.html">HTB Walkthroughs</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+        <!--Main-->
+        <div class="container main">
+            <h1>Signature Verification Server in C</h1>
+            <p>Base socket/file transfer server provided by <a href="https://github.com/nikhilroxtomar/File-Transfer-using-TCP-Socket-in-C/blob/master/server.c">nikhilroxtomar</a>. Modified to meet needs for a project, the verification of x.509 signatures and then running a script. </p>
+            <br>
+            <h2>Setup</h2>
+            <p>Before running the client or server a private and public keypair is needed. In my tests, I used an RSA and sha256 keypair to mimic an x.509 certificate.
+                To generate this keypair the following commands must be ran:</p>
+                <br><pre><code class="lang-Shell">openssl genrsa -out private.pem 4096<br>openssl rsa -in private.pem -pubout -out public.pem
+            </code></pre><br>
+            <h2 id="client">Client</h2>
+            <p>Before running, signature and script file must be compiled into a tarball using: </p><br>
+            <pre><code class="lang-Shell">tar -czvf files.tar.gz [signature] [script.sh]
+            </code></pre><br>
+            <p>The signature can be made using openssl and a public/private keypair:</p>
+            <br><pre><code class="lang-Shell">openssl dgst -sha256 -sign [private key] -out [signature] [file]
+            </code></pre><br>
+            <p>The Client then takes the compressed tarball and sends it to the server. Note that the script must be named <em>script.sh</em> and the signature file must be named <em>sig</em> to match the code. </p>
+            <h2>Server</h2>
+            <p>The server takes the tarball recieved from the client, unzips it into <em>sig</em> and <em>script.sh</em>. If the script is verified by the said signature, the server will run the script and exit.  </p>
+            <h2>Make and Autocompile</h2>
+            <p>The make file compiles both server and client using:</p>
+            <br><pre><code class="lang-Shell">make all
+            </code></pre><br>
+            <h2 id="example-outputs-">Example outputs:</h2>
+            <p>The outputs and test cases done below are using a script.sh file that is one line:</p>
+            <br><pre><code class="lang-Shell">echo "test"
+            </code></pre><br>
+            <p><strong>Server Success with verified signature</strong>
+            <br>
+            <img src="./images/signatureverificationserver/ServerOutputSuccess.png" alt="Server Sucess">
+            <br>
+            <strong>Server Failure with unmatching signature</strong>
+            <br>
+            <img src="./images/signatureverificationserver/ServerOutputFailure.png" alt="Server Failure">
+            <br>
+            <strong>Client Success in sending file</strong>
+            <br>
+            <img src="./images/signatureverificationserver/ClientOutputSuccess.png" alt="Client Success"></p><br><br>
+
+        <center>
+        <a class="button" href="https://github.com/shadyenapp/signatureVerificationServer/tree/main" target="_blank">Main GitHub Repo</a>
+        <a class="button" href="https://github.com/shadyenapp/signatureVerificationServer/blob/main/server.c" target="_blank">Server Code</a>
+        <a class="button" href="https://github.com/shadyenapp/signatureVerificationServer/blob/main/client.c" target="_blank">Client Code</a><br><br><br>
+        </center>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

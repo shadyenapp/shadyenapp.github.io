@@ -14,7 +14,6 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-
 }
 
 .container.header {
@@ -36,11 +35,13 @@ header {
 a {
     text-decoration: none;
     color: #082032;
-
 }
 .header .logo img{
     width: 50px;
     z-index: 100;
+}
+.header a {
+    z-index: 101;
 }
 .header .title {
     padding-bottom: 2.5rem;
@@ -78,7 +79,7 @@ a {
 .post .post-img {
     width: 100%;
     height: 350px;
-    object-fit: cover;
+    object-fit: contain;
 
 }
 .extra-info {
