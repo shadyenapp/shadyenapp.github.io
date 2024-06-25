@@ -43,7 +43,7 @@ a {
 .header a {
     z-index: 101;
 }
-.header .title {
+.header .pagename {
     padding-bottom: 2.5rem;
     align-self: left;
     position: fixed;
