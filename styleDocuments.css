@@ -97,7 +97,7 @@ pre code {
   }
 
 .button {
-    background-color: #f44336;
+    background-color: #0072b1;
     color: white;
     padding: 14px 25px;
     text-align: center;
@@ -107,7 +107,7 @@ pre code {
 }
 .button:hover {
     background-color: white;
-    color: #f44336;
+    color: #0072b1;
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;

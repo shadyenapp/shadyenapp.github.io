@@ -75,6 +75,7 @@ a {
 
 .main .col {
     width: 48%;
+    padding-bottom: 3rem;
 }
 .post .post-img {
     width: 100%;
@@ -158,4 +159,30 @@ a {
         margin-left: 0rem;
         padding: 1rem 0;
     }
+}
+.title {
+    align-self: center;
+    padding-left: 24rem;
+    padding-top: 1.2rem;
+    padding-right: 24rem;
+}
+.button {
+    background-color: #0072b1;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+}
+.button:hover {
+    background-color: white;
+    color: #0072b1;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 1px;
 }
