@@ -1,0 +1,69 @@
+[
+  {
+    "slug": "rubber-ducky",
+    "title": "Sinking the Rubber Ducky",
+    "category": "Physical Penetration Testing",
+    "date": "2024",
+    "summary": "Capstone project (with Emma McLeod) researching and deploying USB Rubber Ducky keystroke-injection payloads, mapping the attack to MITRE ATT&CK and proposing mitigations.",
+    "details": "A CI490 capstone project studying HID-emulation attacks via Hak5's USB Rubber Ducky, which exploits the inherent trust a computer extends to input devices to run arbitrary keystrokes with the current user's privileges. Four DuckyScript payloads were researched, built, and demonstrated: WPA passkey exfiltration (dumping saved Wi-Fi credentials via PowerShell/netsh), SSL/TLS session-key exfiltration from Chrome, HTML page spoofing paired with SEToolkit's credential harvester to steal login credentials, and a file-downloader payload proving arbitrary external program delivery. The exfiltration technique maps to MITRE ATT&CK T1052.001 (Exfiltration Over Physical Medium). The report closes with mitigations: least-privilege/UAC policy, physical access control for high-value systems, personnel security-awareness training, and Windows hardening (disabling autorun, prompting on removable media, restricting USB port access).",
+    "tags": [
+      "USB HID Attacks",
+      "DuckyScript",
+      "MITRE ATT&CK T1052.001",
+      "Credential Harvesting"
+    ],
+    "tools": [
+      "USB Rubber Ducky",
+      "DuckyScript",
+      "PowerShell",
+      "SEToolkit"
+    ],
+    "reportUrl": "/duckyFinalReport.pdf",
+    "reportLabel": "View Full Report (PDF)"
+  },
+  {
+    "slug": "securing-mysql-server",
+    "title": "Securing MySQL Server for a County Health Department",
+    "category": "Database Security",
+    "date": "2024",
+    "summary": "End-to-end hardening of an Ubuntu + MySQL environment for a fictional county health department, covering OS hardening, role-based accounts, and stored-procedure-driven security policy.",
+    "details": "A CI340 database security project standing up a hardened Ubuntu 22.04 + MySQL environment for a county health department handling COVID-19 case data. Coverage includes OS-level hardening (scheduled updates, disabled guest account, locked root account, kernel-level mitigations against ping-flood/SYN-flood/buffer-overflow attacks, firewall rules), a password policy (30-day expiration, 5-password history, one-day minimum age), and moving MySQL off its default port. Database access was modeled around least privilege with role-based connections: a Security/Process/User Administrator role for the security lead, a read/index-only Data Researcher role for analysts, and a Database Manager/Designer/Backup Administrator role for the DBA. Stored procedures were written to enforce security on first run (dropping anonymous accounts and the default database, persisting password policy, and revoking CREATE USER from non-admins). A shell script screens incoming CSV data for embedded SQL statements before load, and general/error/slow-query logs are centralized for weekly audit, with guidance on which log events (CREATE/DROP/ALTER/FLUSH, repeated login failures) warrant immediate incident response.",
+    "tags": [
+      "Database Hardening",
+      "Ubuntu",
+      "MySQL",
+      "Least Privilege",
+      "Log Auditing"
+    ],
+    "tools": [
+      "MySQL",
+      "MySQL Workbench",
+      "Ubuntu 22.04",
+      "Bash"
+    ],
+    "reportUrl": "/CI340 Project 1.pdf",
+    "reportLabel": "View Full Report (PDF)"
+  },
+  {
+    "slug": "application-security-strategy",
+    "title": "Application Security Strategy",
+    "category": "Secure SDLC & Governance Plan",
+    "date": "2023",
+    "summary": "An application-security governance plan for two sensor products, pairing a standard SDLC with Microsoft's Security Development Lifecycle and a RACI chart for stakeholder responsibility.",
+    "details": "Designed an application-security governance plan for two sensor products (the VT235x-c and PSX25), pairing a standard Software Development Lifecycle with Microsoft's Security Development Lifecycle (MSDL) so that \"the program will have gone through both systems,\" reducing the likelihood common vulnerabilities reach release. Built a RACI chart assigning responsible/accountable/consulted/informed roles across the Board of Directors, dev team leads, developers, designers, and the engineering team for tasks like coding standards, policy management, and incident response — and made the case for \"shifting to the left\": catching flaws during design instead of paying to redo the work later in the lifecycle. Covers the planning, SDLC/SSDLC, and governance groundwork that precedes the threat-modeling (STRIDE/DREAD) and code-review phases.",
+    "tags": [
+      "SDLC",
+      "Microsoft SDL",
+      "RACI",
+      "Threat Modeling"
+    ],
+    "tools": [
+      "SDLC",
+      "Microsoft SDL",
+      "RACI",
+      "OWASP"
+    ],
+    "reportUrl": "/SoftwareSecurity Final.pdf",
+    "reportLabel": "View Full Report (PDF)"
+  }
+]

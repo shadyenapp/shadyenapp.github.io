@@ -4,188 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hayden Sapp | Cyber Security Professional</title>
+    <meta name="description" content="Hayden Sapp — Cyber Intelligence &amp; Security professional. Penetration testing, malware analysis, and digital forensics projects.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hayden Sapp | Cyber Security Professional">
+    <meta property="og:description" content="Penetration testing, malware analysis, and digital forensics projects.">
+    <meta property="og:type" content="website">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark Blue-Gray */
-            color: #E5E7EB; /* Light Gray */
-        }
-        .section-title {
-            @apply text-3xl font-bold text-cyan-400 mb-8;
-        }
-        .card {
-            @apply bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:transform hover:-translate-y-2 flex flex-col;
-        }
-        .card-content {
-            @apply flex-grow;
-        }
-        .skill-badge {
-            @apply bg-gray-700 text-cyan-300 text-xs font-semibold mr-2 mb-2 px-2.5 py-0.5 rounded-full inline-block;
-        }
-        .contact-modal-overlay {
-            @apply fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center transition-opacity duration-300;
-        }
-        .contact-modal {
-            @apply bg-gray-800 rounded-lg shadow-xl p-8 max-w-sm w-full transform transition-transform duration-300 scale-95;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="antialiased">
 
+    <div class="bg-fx">
+        <div class="bg-glow one"></div>
+        <div class="bg-glow two"></div>
+        <div class="bg-glow three"></div>
+    </div>
+
     <!-- Header & Navigation -->
-    <header class="bg-gray-900/70 backdrop-blur-lg sticky top-0 z-40">
+    <header class="nav-shell sticky top-0 z-40">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-white">Hayden W. Sapp</a>
-            <div class="hidden md:flex space-x-6 text-sm">
-                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
-                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
-                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
-                <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
-                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+            <a href="#" class="text-lg font-bold text-white font-mono">hayden<span class="text-gradient">@</span>sapp<span class="text-gray-500">:~$</span></a>
+            <div class="hidden md:flex space-x-8 text-sm">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#malware" class="nav-link">Malware Analysis</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-white">
                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
-            <a href="#about" class="block hover:text-cyan-400 transition-colors">About</a>
-            <a href="#projects" class="block hover:text-cyan-400 transition-colors">Projects</a>
-            <a href="#skills" class="block hover:text-cyan-400 transition-colors">Skills</a>
-            <a href="#experience" class="block hover:text-cyan-400 transition-colors">Experience</a>
-            <a href="#contact" class="block hover:text-cyan-400 transition-colors">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-3 text-sm">
+            <a href="#about" class="block nav-link">About</a>
+            <a href="#projects" class="block nav-link">Projects</a>
+            <a href="#malware" class="block nav-link">Malware Analysis</a>
+            <a href="#skills" class="block nav-link">Skills</a>
+            <a href="#experience" class="block nav-link">Experience</a>
+            <a href="#contact" class="block nav-link">Contact</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-12">
 
         <!-- Hero Section -->
-        <section id="hero" class="text-center py-20">
-            <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">HAYDEN SAPP</h1>
-            <p class="text-xl md:text-2xl text-cyan-400 mt-4">Cyber Intelligence & Security Professional</p>
-            <div class="mt-8 flex justify-center space-x-4">
-                <a href="https://github.com/Shadyenapp" target="_blank" class="text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/hayden-sapp-88698b202/" target="_blank" class="text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
+        <section id="hero" class="py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <p class="section-eyebrow">Cyber Intelligence &amp; Security</p>
+                <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mt-3">HAYDEN <span class="text-gradient">SAPP</span></h1>
+                <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-lg">Penetration testing, malware analysis, and digital forensics — built through hands-on projects and continuous practice.</p>
+                <div class="mt-8 flex items-center space-x-5">
+                    <a href="https://github.com/Shadyenapp" target="_blank" rel="noopener" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/hayden-sapp-88698b202/" target="_blank" rel="noopener" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="#contact" class="card-btn !w-auto">Get in Touch</a>
+                </div>
+            </div>
+            <div class="terminal reveal">
+                <div class="terminal-bar">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="ml-2 text-xs text-gray-500 font-mono">whoami.sh</span>
+                </div>
+                <div class="terminal-body">
+                    <div><span class="terminal-prompt">$</span> whoami</div>
+                    <div class="text-white">Hayden Sapp — cyber intelligence &amp; security graduate</div>
+                    <div class="mt-3"><span class="terminal-prompt">$</span> cat focus.txt</div>
+                    <div>penetration testing · malware analysis · digital forensics</div>
+                    <div class="mt-3"><span class="terminal-prompt">$</span> status --current</div>
+                    <div>threat and malware analysis reporting<span class="terminal-cursor"></span></div>
+                </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-16">
+        <section id="about" class="py-16 reveal">
+            <p class="section-eyebrow justify-center flex">01 — About</p>
             <h2 class="section-title text-center">About Me</h2>
-            <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 leading-relaxed">
-                I am highly motivated and detail-oriented Cyber Intelligence and Security graduate with hands-on experience in penetration testing, digital forensics, and malware analysis gained through advanced academic projects and competitions. Proficient in tools like Metasploit, Ghidra, Autopsy, and Wireshark. Currently pursuing the OSCP certification to further develop offensive security skills for a role in threat analysis or penetration testing.
+            <p class="max-w-3xl mx-auto text-center text-lg text-gray-300 leading-relaxed mt-6">
+                I am a highly motivated and detail-oriented Cyber Intelligence and Security graduate with hands-on experience in penetration testing, digital forensics, and malware analysis gained through advanced academic projects and competitions. Proficient in tools like Metasploit, Ghidra, Autopsy, and Wireshark. Currently pursuing the OSCP certification to further develop offensive security skills for a role in threat analysis or penetration testing.
             </p>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-16">
-            <h2 class="section-title text-center">Cyber Security Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card">
-                    <div class="card-content">
-                        <h3 class="text-xl font-bold text-white mb-2">Sinking the Rubber Ducky</h3>
-                        <p class="text-sm text-cyan-400 mb-4">Physical Penetration Testing</p>
-                        <p class="text-gray-400 text-sm mb-4">Researched, developed, and deployed multiple USB-based attacks to simulate physical access threats, mapping vectors to MITRE ATT&CK and proposing NIST 800-53 controls.</p>
-                    </div>
-                    <a href="duckyFinalReport.pdf" target="_blank" class="mt-auto inline-block bg-cyan-600 text-white font-bold text-sm py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors text-center">View Project</a>
-                </div>
-                <div class="card">
-                     <div class="card-content">
-                        <h3 class="text-xl font-bold text-white mb-2">LokiBot Malware Analysis</h3>
-                        <p class="text-sm text-cyan-400 mb-4">Reverse Engineering</p>
-                        <p class="text-gray-400 text-sm mb-4">Conducted static and dynamic analysis on a LokiBot sample, utilizing Ghidra and PEview to identify IOCs, map C2 protocols, and generate YARA rules for detection.</p>
-                    </div>
-                    <a href="LokiBot Analysis.pdf" target="_blank" class="mt-auto inline-block bg-cyan-600 text-white font-bold text-sm py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors text-center">View Project</a>
-                </div>
-                <div class="card">
-                     <div class="card-content">
-                        <h3 class="text-xl font-bold text-white mb-2">Software Security Audit</h3>
-                        <p class="text-sm text-cyan-400 mb-4">Application Security</p>
-                        <p class="text-gray-400 text-sm mb-4">Performed a security audit on C/C++ source code, identifying and exploiting a buffer overflow vulnerability with a PoC, and provided code-level remediation advice.</p>
-                    </div>
-                    <a href="SoftwareSecurity Final.pdf" target="_blank" class="mt-auto inline-block bg-cyan-600 text-white font-bold text-sm py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors text-center">View Project</a>
-                </div>
-                 <div class="card">
-                     <div class="card-content">
-                        <h3 class="text-xl font-bold text-white mb-2">Securing MySQL Server</h3>
-                        <p class="text-sm text-cyan-400 mb-4">Database Security</p>
-                        <p class="text-gray-400 text-sm mb-4">A detailed report on the steps, policies, and procedures for securing an Ubuntu operating system and a MySQL database environment for a county health department.</p>
-                    </div>
-                    <a href="CI340 Project 1.pdf" target="_blank" class="mt-auto inline-block bg-cyan-600 text-white font-bold text-sm py-2 px-4 rounded-lg hover:bg-cyan-700 transition-colors text-center">View Project</a>
-                </div>
-            </div>
+        <section id="projects" class="py-16 reveal">
+            <p class="section-eyebrow justify-center flex">02 — Portfolio</p>
+            <h2 class="section-title text-center">Security Projects</h2>
+            <div id="project-filters" class="flex flex-wrap justify-center gap-2 mt-6 mb-10"></div>
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="projects-empty" class="hidden empty-state">No projects added yet — check back soon.</div>
+        </section>
+
+        <!-- Malware Analysis Section -->
+        <section id="malware" class="py-16 reveal">
+            <p class="section-eyebrow justify-center flex">03 — Reverse Engineering</p>
+            <h2 class="section-title text-center">Malware Analysis Reports</h2>
+            <p class="max-w-2xl mx-auto text-center text-gray-400 mt-4 mb-10">Static and dynamic analysis write-ups: sample behavior, IOCs, C2 protocols, and detection rules.</p>
+            <div id="malware-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="malware-empty" class="hidden empty-state">No malware reports published yet — this section is ready for the next one.</div>
         </section>
 
         <!-- Skills & Certifications Section -->
-        <section id="skills" class="py-16">
-            <h2 class="section-title text-center">Skills & Certifications</h2>
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <section id="skills" class="py-16 reveal">
+            <p class="section-eyebrow justify-center flex">04 — Toolbox</p>
+            <h2 class="section-title text-center">Skills &amp; Certifications</h2>
+            <div class="max-w-6xl mx-auto mt-10">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="card !p-0">
-                        <div class="bg-gray-700/50 p-4 rounded-t-lg"><h3 class="font-bold text-white text-lg">Offensive Security</h3></div>
-                        <div class="p-4"><span class="skill-badge">Metasploit, </span><span class="skill-badge">Nmap, </span><span class="skill-badge">Aircrack-ng, </span><span class="skill-badge">Ettercap, </span><span class="skill-badge">Netcat, </span><span class="skill-badge">SEToolkit</span></div>
+                        <div class="bg-gray-700/30 p-4 rounded-t-lg border-b border-[--border]"><h3 class="font-bold text-white text-lg">Offensive Security</h3></div>
+                        <div class="p-4">
+                            <span class="skill-badge">Metasploit</span><span class="skill-badge">Nmap</span><span class="skill-badge">Aircrack-ng</span><span class="skill-badge">Ettercap</span><span class="skill-badge">Netcat</span><span class="skill-badge">SEToolkit</span>
+                        </div>
                     </div>
                     <div class="card !p-0">
-                        <div class="bg-gray-700/50 p-4 rounded-t-lg"><h3 class="font-bold text-white text-lg">DFIR & Malware Analysis</h3></div>
-                        <div class="p-4"><span class="skill-badge">FTK, </span><span class="skill-badge">Autopsy, </span><span class="skill-badge">Volatility, </span><span class="skill-badge">Splunk, </span><span class="skill-badge">Security Onion, </span><span class="skill-badge">Ghidra, </span><span class="skill-badge">IDA, </span><span class="skill-badge">x64dbg, </span><span class="skill-badge">PEview</span></div>
+                        <div class="bg-gray-700/30 p-4 rounded-t-lg border-b border-[--border]"><h3 class="font-bold text-white text-lg">DFIR &amp; Malware Analysis</h3></div>
+                        <div class="p-4">
+                            <span class="skill-badge">FTK</span><span class="skill-badge">Autopsy</span><span class="skill-badge">Volatility</span><span class="skill-badge">Splunk</span><span class="skill-badge">Security Onion</span><span class="skill-badge">Ghidra</span><span class="skill-badge">IDA</span><span class="skill-badge">x64dbg</span><span class="skill-badge">PEview</span>
+                        </div>
                     </div>
                     <div class="card !p-0">
-                         <div class="bg-gray-700/50 p-4 rounded-t-lg"><h3 class="font-bold text-white text-lg">Programming & Infrastructure</h3></div>
-                        <div class="p-4"><span class="skill-badge">Python, </span><span class="skill-badge">C/C++, </span><span class="skill-badge">Bash, </span><span class="skill-badge">PowerShell, </span><span class="skill-badge">Fortran, </span><span class="skill-badge">MySQL, </span><span class="skill-badge">AWS, </span><span class="skill-badge">Azure, </span><span class="skill-badge">Docker</span></div>
+                        <div class="bg-gray-700/30 p-4 rounded-t-lg border-b border-[--border]"><h3 class="font-bold text-white text-lg">Programming &amp; Infrastructure</h3></div>
+                        <div class="p-4">
+                            <span class="skill-badge">Python</span><span class="skill-badge">C/C++</span><span class="skill-badge">Bash</span><span class="skill-badge">PowerShell</span><span class="skill-badge">Fortran</span><span class="skill-badge">MySQL</span><span class="skill-badge">AWS</span><span class="skill-badge">Azure</span><span class="skill-badge">Docker</span>
+                        </div>
                     </div>
                 </div>
-                 <div class="mt-12 text-center">
-                    <h3 class="text-2xl font-bold text-white mb-6">Certifications</h3>
+                <div class="mt-14 text-center">
+                    <h3 class="text-xl font-bold text-white mb-6">Certifications</h3>
                     <div class="flex flex-wrap justify-center">
-                        <span class="skill-badge !text-base !px-4 !py-2">Certified Ethical Hacker (CEH)</span>
-                        <span class="skill-badge !text-base !px-4 !py-2">Linux Systems Administrator</span>
-                        <span class="skill-badge !text-base !px-4 !py-2">Network Pro (Net+)</span>
-                        <span class="skill-badge !text-base !px-4 !py-2">PC Pro (A+)</span>
-                        <span class="skill-badge !text-base !px-4 !py-2 !bg-cyan-800 !text-cyan-200">OSCP (In Progress)</span>
+                        <span class="skill-badge !text-sm !px-4 !py-2">Certified Ethical Hacker (CEH)</span>
+                        <span class="skill-badge !text-sm !px-4 !py-2">Linux Systems Administrator</span>
+                        <span class="skill-badge !text-sm !px-4 !py-2">Network Pro (Net+)</span>
+                        <span class="skill-badge !text-sm !px-4 !py-2">PC Pro (A+)</span>
+                        <span class="skill-badge !text-sm !px-4 !py-2 !text-cyan-300" style="border-color: var(--accent);">OSCP (In Progress)</span>
                     </div>
                 </div>
             </div>
         </section>
-
         <!-- Experience & Education Section -->
-        <section id="experience" class="py-16">
-            <h2 class="section-title text-center">Experience & Education</h2>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+        <section id="experience" class="py-16 reveal">
+            <p class="section-eyebrow justify-center flex">05 — Background</p>
+            <h2 class="section-title text-center">Experience &amp; Education</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 mt-10">
                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Professional Experience</h3>
-                    <div class="space-y-8 relative border-l-2 border-gray-700 pl-6">
-                         <!-- Experience Item -->
-                        <div class="relative">
-                             <div class="absolute -left-7 w-4 h-4 bg-cyan-400 rounded-full mt-1.5"></div>
-                             <p class="font-semibold text-sm text-cyan-400">Aug 2024 - Present</p>
+                    <h3 class="text-xl font-bold text-white mb-6">Professional Experience</h3>
+                    <div class="space-y-8 relative border-l-2 border-[--border] pl-6">
+                        <div class="timeline-item">
+                             <div class="timeline-dot"></div>
+                             <p class="font-semibold text-sm text-cyan-400 font-mono">Aug 2024 - Present</p>
                              <h4 class="text-lg font-bold text-white mt-1">Inventory Specialist</h4>
                              <p class="text-sm text-gray-400 mb-2">Walgreens Boots Alliance</p>
                              <p class="text-sm text-gray-300">Execute asset protection strategies to mitigate risk, resulting in 94% inventory accuracy.</p>
                         </div>
-                         <!-- Experience Item -->
-                        <div class="relative">
-                            <div class="absolute -left-7 w-4 h-4 bg-cyan-400 rounded-full mt-1.5"></div>
-                            <p class="font-semibold text-sm text-cyan-400">Jun 2022 - Aug 2024</p>
-                            <h4 class="text-lg font-bold text-white mt-1">Chargeback Dispute Handler & Fraud Investigator</h4>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="font-semibold text-sm text-cyan-400 font-mono">Jun 2022 - Aug 2024</p>
+                            <h4 class="text-lg font-bold text-white mt-1">Chargeback Dispute Handler &amp; Fraud Investigator</h4>
                             <p class="text-sm text-gray-400 mb-2">Klampp Consulting</p>
                             <p class="text-sm text-gray-300">Analyzed digital evidence across ~2,000 monthly cases, achieving a 60% recovery rate (~$90k/month).</p>
                         </div>
                     </div>
                 </div>
-                 <div>
-                    <h3 class="text-2xl font-bold text-white mb-6">Education</h3>
-                    <div class="space-y-8 relative border-l-2 border-gray-700 pl-6">
-                        <div class="relative">
-                            <div class="absolute -left-7 w-4 h-4 bg-cyan-400 rounded-full mt-1.5"></div>
-                            <p class="font-semibold text-sm text-cyan-400">August 2021 - May 2024</p>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Education</h3>
+                    <div class="space-y-8 relative border-l-2 border-[--border] pl-6">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="font-semibold text-sm text-cyan-400 font-mono">Aug 2021 - May 2024</p>
                             <h4 class="text-lg font-bold text-white mt-1">B.S. in Cyber Intelligence and Security</h4>
                             <p class="text-sm text-gray-400 mb-2">Embry-Riddle Aeronautical University</p>
                             <p class="text-sm text-gray-300">Graduated Summa Cum Laude with a 3.96 GPA.</p>
@@ -194,101 +189,38 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section -->
-        <section id="contact" class="py-16 text-center">
-            <h2 class="section-title" style="font-size: 155%;">Get In Touch</h2>
-            <p class="max-w-xl mx-auto text-lg text-gray-300 mb-8">
+        <section id="contact" class="py-16 text-center reveal">
+            <p class="section-eyebrow justify-center flex">06 — Contact</p>
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="max-w-xl mx-auto text-lg text-gray-300 mb-10 mt-4">
                 I'm currently seeking roles in threat analysis and penetration testing. If you have an opportunity or just want to connect, feel free to reach out.
             </p>
-        <center>
-            <div class="space-y-4">
-                <a href="mailto:hayden.sapp@gmail.com" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    <span>hayden.sapp@gmail.com</span>
+            <div class="flex flex-col items-center space-y-4">
+                <a href="mailto:hayden.sapp@gmail.com" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span class="font-mono">hayden.sapp@gmail.com</span>
                 </a>
-                 <div class="flex items-center space-x-3 text-gray-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    <span>720-338-7684</span>
+                <div class="flex items-center space-x-3 text-gray-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <span class="font-mono">720-338-7684</span>
                 </div>
-                 <a href="https://www.linkedin.com/in/hayden-sapp-88698b202/" target="_blank" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <a href="https://www.linkedin.com/in/hayden-sapp-88698b202/" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     <span>LinkedIn</span>
                 </a>
-                <a href="https://github.com/Shadyenapp" target="_blank" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                <a href="https://github.com/Shadyenapp" target="_blank" rel="noopener" class="flex items-center space-x-3 text-gray-300 hover:text-cyan-400 transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
                     <span>GitHub</span>
                 </a>
             </div>
-        </center>
         </section>
     </main>
 
-    <!-- Contact Modal -->
-    <div id="contact-modal-overlay" class="contact-modal-overlay opacity-0 pointer-events-none">
-        <div id="contact-modal" class="contact-modal">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-white">Contact Information</h3>
-                <button id="close-modal-button" type="button" class="p-1 rounded-full text-gray-400 hover:text-white hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-cyan-500">
-                    <span class="sr-only">Close</span>
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-        </div>
-    </div>
+    <footer class="border-t border-[--border] py-8 text-center text-xs text-gray-500 font-mono"></footer>
 
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // Close mobile menu on click
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        
-        // Contact Modal Logic
-        const contactButton = document.getElementById('contact-button');
-        const contactModalOverlay = document.getElementById('contact-modal-overlay');
-        const contactModal = document.getElementById('contact-modal');
-        const closeModalButton = document.getElementById('close-modal-button');
-
-        function openModal() {
-            contactModalOverlay.classList.remove('opacity-0', 'pointer-events-none');
-            contactModal.classList.remove('scale-95');
-        }
-
-        function closeModal() {
-            contactModalOverlay.classList.add('opacity-0');
-             contactModal.classList.add('scale-95');
-            setTimeout(() => {
-                contactModalOverlay.classList.add('pointer-events-none');
-            }, 300); // Wait for transition to finish
-        }
-
-        contactButton.addEventListener('click', openModal);
-        closeModalButton.addEventListener('click', closeModal);
-        contactModalOverlay.addEventListener('click', (event) => {
-            if (event.target === contactModalOverlay) {
-                closeModal();
-            }
-        });
-
-    </script>
-
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/home.js"></script>
 </body>
 </html>
-

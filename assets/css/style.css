@@ -1,0 +1,506 @@
+/* =========================================================
+   Hayden Sapp — Portfolio
+   Custom design layer on top of Tailwind (CDN).
+   ========================================================= */
+
+:root {
+  --bg: #0a0e16;
+  --bg-soft: #0f141f;
+  --surface: #121826;
+  --surface-2: #161d2e;
+  --border: #232b3d;
+  --text: #dbe2ef;
+  --text-dim: #8b96ad;
+  --accent: #22d3ee;      /* cyan */
+  --accent-2: #7c5cff;    /* violet */
+  --accent-3: #34e19b;    /* green, used sparingly */
+  --danger: #ff5d7a;      /* used for malware section accent */
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: 'Inter', sans-serif;
+}
+
+* { scrollbar-color: var(--border) transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background-color: var(--bg);
+  color: var(--text);
+  position: relative;
+}
+
+/* Ambient background: soft glows + faint grid */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+}
+.bg-glow {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.22;
+}
+.bg-glow.one { top: -220px; left: -160px; background: var(--accent); }
+.bg-glow.two { top: 300px; right: -220px; background: var(--accent-2); }
+.bg-glow.three { bottom: -260px; left: 30%; background: var(--accent-3); opacity: 0.12; }
+
+main, header, footer { position: relative; z-index: 1; }
+
+/* Typography accents */
+.font-mono { font-family: var(--mono); }
+.text-gradient {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Nav */
+.nav-shell {
+  background: rgba(10, 14, 22, 0.72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-link {
+  position: relative;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link:hover::after,
+.nav-link.active::after { width: 100%; }
+.nav-link.active { color: var(--accent); }
+
+/* Section title */
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Terminal hero widget */
+.terminal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+  overflow: hidden;
+  text-align: left;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 999px; }
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27c93f; }
+.terminal-body {
+  padding: 18px 20px;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  min-height: 150px;
+}
+.terminal-prompt { color: var(--accent-3); }
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, var(--surface), var(--bg-soft));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 18px 40px -22px rgba(34, 211, 238, 0.35);
+}
+.card-content { flex-grow: 1; }
+.card-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin: 0 0.35rem 0.35rem 0;
+}
+.card-tag.danger {
+  color: var(--danger);
+  background: rgba(255, 93, 122, 0.08);
+  border-color: rgba(255, 93, 122, 0.3);
+}
+.card-btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: var(--accent);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.card-btn:hover { background: var(--accent); color: #06222a; }
+
+/* Malware section variant (subtle red/orange accent) */
+.card.malware:hover {
+  border-color: rgba(255, 93, 122, 0.4);
+  box-shadow: 0 18px 40px -22px rgba(255, 93, 122, 0.3);
+}
+.card.malware .card-btn {
+  background: rgba(255, 93, 122, 0.1);
+  border-color: rgba(255, 93, 122, 0.35);
+  color: var(--danger);
+}
+.card.malware .card-btn:hover { background: var(--danger); color: #2b0510; }
+
+/* Skill badges */
+.skill-badge {
+  font-family: var(--mono);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: #a5f3fc;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 0 0.4rem 0.4rem 0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Timeline */
+.timeline-item { position: relative; }
+.timeline-dot {
+  position: absolute;
+  left: -1.95rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15);
+}
+
+/* Empty state (for collections with no items yet) */
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+
+/* Filter chips */
+.filter-chip {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-chip:hover { color: var(--text); border-color: var(--accent); }
+.filter-chip.active {
+  color: #06222a;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Detail page */
+.detail-hero {
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(34,211,238,0.06), transparent);
+}
+.kv-grid dt {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+.kv-grid dd { color: var(--text); margin-bottom: 1rem; }
+
+/* Back link */
+.back-link {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+.back-link:hover { color: var(--accent); }
+
+/* Scrollbar (webkit) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* =========================================================
+   Ghidra-style code viewer
+   Mimics Ghidra's default (light) Listing/Decompile look —
+   used for malware analysis code blocks. When a block has a
+   raw (Listing) side and a decompiled side, hovering a line
+   in either pane highlights its paired line in the other via
+   a shared data-group attribute (see assets/js/ghidra.js).
+   ========================================================= */
+
+.ghidra-window {
+  background: #ffffff;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -18px rgba(0,0,0,0.5);
+  margin-bottom: 1.5rem;
+}
+.ghidra-titlebar {
+  background: #e8e8e8;
+  border-bottom: 1px solid #c8c8c8;
+  padding: 0.4rem 0.75rem;
+}
+.ghidra-tab {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: #333;
+  background: #ffffff;
+  border: 1px solid #c8c8c8;
+  border-bottom: 2px solid #5c9fd6;
+  padding: 0.2rem 0.65rem;
+  border-radius: 3px 3px 0 0;
+}
+.ghidra-body {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+/* Applied via JS to the raw (Listing) pane of a pair block so it scrolls
+   internally and matches the decompiled pane's natural height instead of
+   stretching the page. */
+.ghidra-body-scroll {
+  overflow-y: auto;
+  scrollbar-color: #b7b7b7 #f2f2f2; /* Firefox: thumb, track -- light to match Ghidra's theme */
+}
+.ghidra-body-scroll::-webkit-scrollbar { width: 10px; }
+.ghidra-body-scroll::-webkit-scrollbar-track { background: #f2f2f2; }
+.ghidra-body-scroll::-webkit-scrollbar-thumb { background: #c8c8c8; border-radius: 999px; }
+.ghidra-body-scroll::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+.ghidra-line {
+  display: flex;
+  white-space: pre;
+  transition: background-color 0.12s ease;
+}
+.ghidra-line:hover,
+.ghidra-line.hl {
+  background: #ffe9a8;
+}
+.ghidra-lineno {
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  text-align: right;
+  padding: 0 0.6rem;
+  color: #6a6a6a;
+  background: #f2f2f2;
+  border-right: 1px solid #dcdcdc;
+  user-select: none;
+}
+.ghidra-code {
+  padding: 0 0.85rem;
+  color: #000000;
+}
+
+/* Ghidra syntax token colors (approximating default theme) */
+.g-kw   { color: #0000ff; }
+.g-type { color: #0000ff; }
+.g-func { color: #7a1fa2; }
+.g-comment { color: #008000; font-style: italic; }
+.g-str  { color: #cc0000; }
+.g-num  { color: #1c00cf; }
+.g-reg  { color: #7a1fa2; }
+.g-mnem { color: #0000ff; font-weight: 600; }
+.g-addr { color: #6a6a6a; }
+
+/* Raw/decompiled side-by-side pairing */
+.ghidra-pair-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 900px) {
+  .ghidra-pair-grid { grid-template-columns: 1fr 1fr; }
+}
+.ghidra-pair-grid .ghidra-window { margin-bottom: 0; }
+
+/* Report section scaffolding (malware detail sections) */
+.report-section { margin-bottom: 2.5rem; }
+.report-section h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  font-family: var(--mono);
+}
+.report-section p { color: var(--text); line-height: 1.75; margin-bottom: 1rem; }
+
+/* Inline command/tool references in report body text (e.g. `binwalk -E`) --
+   distinct from surrounding prose so a reader can spot at a glance that
+   it's a literal command, not just an italicized term. */
+.report-section code {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05em 0.45em;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: #67e8f9;
+  white-space: nowrap;
+}
+
+/* Terminal-output block (shell command transcripts, distinct from Ghidra panes) */
+.term-block {
+  background: #05070c;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #9ae6b4;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  white-space: pre-wrap;
+}
+.term-block .prompt { color: #67e8f9; }
+
+/* Image placeholder (referenced screenshot not yet uploaded) */
+.img-placeholder {
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.img-placeholder .cap { display: block; margin-top: 0.4rem; color: var(--text-dim); font-style: italic; }
+
+/* Real screenshot embedded in a report section */
+.report-image {
+  margin: 0 0 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.report-image img { display: block; width: 100%; height: auto; }
+.report-image figcaption {
+  padding: 0.6rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+/* Plain code block -- for scratch work / math walkthroughs that aren't
+   actual Ghidra output, so they shouldn't get the Ghidra light-theme
+   treatment. Just a normal dark monospace block matching the site theme. */
+.code-block {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "python",
+    "name": "Python",
+    "tagline": "Scripting, automation, and tooling",
+    "summary": "EXAMPLE ENTRY — replace this summary and the programs below with your own. This shows the format a new language page expects.",
+    "programs": [
+      {
+        "title": "Sample Program Title",
+        "description": "One or two sentences on what this program does and why you built it.",
+        "repoUrl": "https://github.com/Shadyenapp/your-repo",
+        "highlights": ["What it demonstrates", "Key library or technique used"]
+      }
+    ]
+  }
+]
