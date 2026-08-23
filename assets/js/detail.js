@@ -32,9 +32,28 @@ function iocsHtml(iocs) {
 // A malware entry can either be a simple write-up (just `details` text, as
 // before) or a rich one with a `sections` array for a full walkthrough:
 // terminal transcripts, Ghidra-styled decompiled code, image placeholders,
-// and (once real raw listings exist) hover-linked raw/decompiled pairs.
-function termBlockHtml(text) {
-  return `<pre class="term-block">${escapeHtml(text)}</pre>`;
+// data tables, a timeline, and callouts -- see sectionBodyHtml/reportSectionHtml.
+
+// Wraps a code/term block with a small labeled tab above it, like a physical
+// evidence tag -- used whenever the block has a title/label to show. Kept as
+// a separate opt-in wrapper (rather than baked into .code-block/.term-block)
+// so existing entries without a title render exactly as before.
+function evidenceWrapHtml(label, innerHtml) {
+  return `
+    <div class="evidence">
+      <div class="evidence-tab">${escapeHtml(label)}</div>
+      ${innerHtml}
+    </div>`;
+}
+
+// `term` is either a plain string (legacy -- renders exactly as before, no
+// tab) or `{ label, text }` for a labeled evidence block, e.g. a registry
+// value or a Prefetch filename with a source annotation above it.
+function termBlockHtml(term) {
+  if (term && typeof term === "object") {
+    return evidenceWrapHtml(term.label || "Evidence", `<pre class="term-block">${escapeHtml(term.text)}</pre>`);
+  }
+  return `<pre class="term-block">${escapeHtml(term)}</pre>`;
 }
 
 // `image` can be a real screenshot (`{ src, caption }`) once one's been
@@ -56,10 +75,58 @@ function imagePlaceholderHtml(img) {
   }</div>`;
 }
 
-// Plain (non-Ghidra) code block -- for scratch work / math walkthroughs that
-// aren't actual tool output, so they shouldn't look like a Ghidra window.
+// Plain (non-Ghidra) code block -- for scratch work / math walkthroughs, decoded
+// config files, or any other listing that isn't actual reverse-engineering tool
+// output, so it doesn't get the Ghidra light-theme treatment. Gets an evidence
+// tab whenever a title is given, same as termBlockHtml.
 function renderPlainCode(block) {
-  return `<pre class="code-block">${escapeHtml(block.code)}</pre>`;
+  const inner = `<pre class="code-block">${escapeHtml(block.code)}</pre>`;
+  return block.title ? evidenceWrapHtml(block.title, inner) : inner;
+}
+
+// A data table for tabular content (file/hash listings, IOC summaries, ATT&CK
+// mappings) -- real <table> markup rather than hand-aligned monospace text.
+// Cell/header text is escaped, same trust model as `iocsHtml`.
+function tableHtml(table) {
+  if (!table || !table.rows || !table.rows.length) return "";
+  const head = table.headers
+    ? `<thead><tr>${table.headers.map((h) => `<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>`
+    : "";
+  const body = table.rows
+    .map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`)
+    .join("");
+  const wrapped = `<div class="table-wrap"><table class="data-table">${head}<tbody>${body}</tbody></table></div>`;
+  return table.title ? evidenceWrapHtml(table.title, wrapped) : wrapped;
+}
+
+// A vertical dot-timeline, reusing the site's existing .timeline-item/.timeline-dot
+// look (see the About/experience section) inside a bordered rail. `text` is
+// authored HTML like `body`, so <strong>/<code> pass through untouched.
+function timelineHtml(items) {
+  if (!items || !items.length) return "";
+  const rows = items
+    .map(
+      (it) => `
+      <div class="report-tl-item timeline-item">
+        <span class="timeline-dot"></span>
+        <p class="report-tl-time">${escapeHtml(it.time)}</p>
+        <p class="report-tl-text">${it.text}</p>
+      </div>`
+    )
+    .join("");
+  return `<div class="report-timeline">${rows}</div>`;
+}
+
+// A highlighted callout box -- `tone: "flag"` for a critical/must-know point,
+// `tone: "trace"` for a technical aside. `text` is authored HTML like `body`.
+function calloutHtml(callout) {
+  if (!callout) return "";
+  const tone = callout.tone === "flag" ? "flag" : "trace";
+  return `
+    <div class="callout ${tone}">
+      ${callout.tag ? `<span class="callout-tag">${escapeHtml(callout.tag)}</span>` : ""}
+      <p>${callout.text}</p>
+    </div>`;
 }
 
 function sectionBodyHtml(section) {
@@ -76,27 +143,69 @@ function sectionBodyHtml(section) {
     html += section.code.type === "plain" ? renderPlainCode(section.code) : renderGhidraBlock(section.code);
   }
   if (section.image) html += imagePlaceholderHtml(section.image);
+  if (section.table) html += tableHtml(section.table);
+  if (section.timeline) html += timelineHtml(section.timeline);
+  if (section.callout) html += calloutHtml(section.callout);
   return html;
 }
 
-function renderSections(sections) {
-  return sections
-    .map((s) => `<div class="report-section"><h2>${escapeHtml(s.heading)}</h2>${sectionBodyHtml(s)}</div>`)
+// Each section gets a numbered, bordered header (01, 02, ...) and an anchor
+// id so the side table-of-contents (renderSections, below) can jump to it.
+function reportSectionHtml(section, index) {
+  const num = String(index + 1).padStart(2, "0");
+  return `
+    <section id="report-sec-${index}" class="report-section">
+      <div class="report-section-head">
+        <span class="report-num">${num}</span>
+        <h2>${escapeHtml(section.heading)}</h2>
+      </div>
+      ${sectionBodyHtml(section)}
+    </section>`;
+}
+
+// A sticky side table-of-contents next to the numbered section list -- only
+// shown once a report actually has enough sections to need one. The accent
+// color follows the collection (rose for malware, cyan otherwise) via a CSS
+// custom property, same convention as .card-tag.danger elsewhere.
+function renderSections(sections, meta) {
+  const toc = sections
+    .map((s, i) => `<li><a href="#report-sec-${i}">${String(i + 1).padStart(2, "0")} — ${escapeHtml(s.heading)}</a></li>`)
     .join("");
+  const body = sections.map((s, i) => reportSectionHtml(s, i)).join("");
+  const accentVar = meta.accent === "rose" ? "var(--danger)" : "var(--accent)";
+  return `
+    <div class="report-shell" style="--report-accent: ${accentVar};">
+      <nav class="report-toc"><ol>${toc}</ol></nav>
+      <div class="report-main">${body}</div>
+    </div>`;
 }
 
 function renderReportDetail(item, meta) {
   document.title = `${item.title} | Hayden Sapp`;
   const root = document.getElementById("detail-root");
   const hasSections = Array.isArray(item.sections) && item.sections.length > 0;
+
+  // The sticky side TOC needs more horizontal room than the standard
+  // max-w-3xl detail container -- only widen it for reports that actually
+  // have a TOC to show, so plain write-ups (no `sections`) keep their
+  // narrower, more readable column.
+  if (hasSections) {
+    const mainEl = document.querySelector("main");
+    if (mainEl) {
+      mainEl.classList.remove("max-w-3xl");
+      mainEl.classList.add("max-w-5xl");
+    }
+  }
+
   root.innerHTML = `
     <p class="section-eyebrow">${escapeHtml(meta.label)}</p>
     <h1 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-3">${escapeHtml(item.title)}</h1>
     <p class="font-mono text-sm text-gray-500 mb-6">${escapeHtml(item.category || item.sampleType || "")} ${item.date ? "&middot; " + escapeHtml(item.date) : ""}</p>
     ${tagsHtml(item.tags, meta.accent)}
     <p class="text-gray-300 leading-relaxed mb-8">${escapeHtml(item.details || item.summary)}</p>
+    ${item.callout ? calloutHtml(item.callout) : ""}
 
-    ${hasSections ? renderSections(item.sections) : ""}
+    ${hasSections ? renderSections(item.sections, meta) : ""}
 
     <dl class="kv-grid grid sm:grid-cols-2 gap-x-8 mb-8">
       ${item.tools && item.tools.length ? `<div><dt>Tools</dt><dd>${item.tools.map(escapeHtml).join(", ")}</dd></div>` : ""}
