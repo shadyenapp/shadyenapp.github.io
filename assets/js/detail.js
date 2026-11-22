@@ -65,7 +65,9 @@ function imagePlaceholderHtml(img) {
 
   if (src) {
     return `<figure class="report-image">
-      <img src="${encodeURI(src)}" alt="${escapeHtml(caption || "")}" loading="lazy" />
+      <img src="${encodeURI(src)}" alt="${escapeHtml(caption || "")}"${
+        img.width && img.height ? ` width="${Number(img.width)}" height="${Number(img.height)}"` : ""
+      } loading="lazy" decoding="async" />
       ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
     </figure>`;
   }

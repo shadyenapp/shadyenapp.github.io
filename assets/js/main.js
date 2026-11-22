@@ -18,7 +18,7 @@ function escapeHtml(str) {
 // `root` lets pages inside /pages/ pass "../" so paths resolve either way.
 async function fetchJSON(path) {
   try {
-    const res = await fetch(path, { cache: "no-store" });
+    const res = await fetch(path, { cache: "no-cache" });
     if (!res.ok) throw new Error(`${path} -> HTTP ${res.status}`);
     return await res.json();
   } catch (err) {

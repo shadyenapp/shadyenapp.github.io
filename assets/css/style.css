@@ -37,6 +37,11 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  /* Own compositor layer so the fixed background is painted once and
+     reused while scrolling, instead of being repainted every frame. */
+  transform: translateZ(0);
+  will-change: transform;
+  contain: strict;
 }
 .bg-fx::before {
   content: "";
@@ -53,12 +58,14 @@ body {
   width: 640px;
   height: 640px;
   border-radius: 9999px;
-  filter: blur(120px);
+  /* Soft edge from a radial gradient rather than filter: blur(120px) --
+     same look, but a live 120px blur was the main cause of janky scrolling. */
+  background: radial-gradient(circle closest-side, var(--glow-color) 0%, transparent 100%);
   opacity: 0.22;
 }
-.bg-glow.one { top: -220px; left: -160px; background: var(--accent); }
-.bg-glow.two { top: 300px; right: -220px; background: var(--accent-2); }
-.bg-glow.three { bottom: -260px; left: 30%; background: var(--accent-3); opacity: 0.12; }
+.bg-glow.one { top: -220px; left: -160px; --glow-color: var(--accent); }
+.bg-glow.two { top: 300px; right: -220px; --glow-color: var(--accent-2); }
+.bg-glow.three { bottom: -260px; left: 30%; --glow-color: var(--accent-3); opacity: 0.12; }
 
 main, header, footer { position: relative; z-index: 1; }
 
@@ -73,8 +80,9 @@ main, header, footer { position: relative; z-index: 1; }
 
 /* Nav */
 .nav-shell {
-  background: rgba(10, 14, 22, 0.72);
-  backdrop-filter: blur(14px);
+  /* Near-opaque instead of backdrop-filter: blur(), which re-blurred the
+     page under the sticky nav on every scroll frame. */
+  background: rgba(10, 14, 22, 0.94);
   border-bottom: 1px solid var(--border);
 }
 .nav-link {
