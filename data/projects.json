@@ -43,27 +43,5 @@
     ],
     "reportUrl": "/CI340 Project 1.pdf",
     "reportLabel": "View Full Report (PDF)"
-  },
-  {
-    "slug": "application-security-strategy",
-    "title": "Application Security Strategy",
-    "category": "Secure SDLC & Governance Plan",
-    "date": "2023",
-    "summary": "An application-security governance plan for two sensor products, pairing a standard SDLC with Microsoft's Security Development Lifecycle and a RACI chart for stakeholder responsibility.",
-    "details": "Designed an application-security governance plan for two sensor products (the VT235x-c and PSX25), pairing a standard Software Development Lifecycle with Microsoft's Security Development Lifecycle (MSDL) so that \"the program will have gone through both systems,\" reducing the likelihood common vulnerabilities reach release. Built a RACI chart assigning responsible/accountable/consulted/informed roles across the Board of Directors, dev team leads, developers, designers, and the engineering team for tasks like coding standards, policy management, and incident response — and made the case for \"shifting to the left\": catching flaws during design instead of paying to redo the work later in the lifecycle. Covers the planning, SDLC/SSDLC, and governance groundwork that precedes the threat-modeling (STRIDE/DREAD) and code-review phases.",
-    "tags": [
-      "SDLC",
-      "Microsoft SDL",
-      "RACI",
-      "Threat Modeling"
-    ],
-    "tools": [
-      "SDLC",
-      "Microsoft SDL",
-      "RACI",
-      "OWASP"
-    ],
-    "reportUrl": "/SoftwareSecurity Final.pdf",
-    "reportLabel": "View Full Report (PDF)"
   }
 ]
